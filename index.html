@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shopping sadegh</title>
+    <!-- box Icos-->
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+
+  <body>
+    <!--header-->
+
+    <header>
+      <!-- nave-->
+      <div class="nav container">
+        <a href="#" class="logo">sadegh shop</a>
+        <!-- cart icon-->
+        <i class="bx bx-shopping-bag" id="cart-icon"></i>
+        <span class="countInCart">0</span>
+      </div>
+    </header>
+    <!-- shop-->
+    <section class="shop container">
+      <h2 class="section-title">shop products</h2>
+      <!-- content-->
+      <div class="shop-content">
+        <!-- box1-->
+        <div class="product-box">
+          <img src="./src/image/f1.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code1</h2>
+          <span class="price">$1520</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn1"></i>
+        </div>
+        <!-- box2-->
+        <div class="product-box">
+          <img src="./src/image/f2.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code2</h2>
+          <span class="price">$15.23</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn2"></i>
+        </div>
+        <!-- box3-->
+        <div class="product-box">
+          <img src="./src/image/f3.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code3</h2>
+          <span class="price">$175</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn3"></i>
+        </div>
+        <!-- box4-->
+        <div class="product-box">
+          <img src="./src/image/f4.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code4</h2>
+          <span class="price">$124</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn4"></i>
+        </div>
+        <!-- box5-->
+        <div class="product-box">
+          <img src="./src/image/f5.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code5</h2>
+          <span class="price">$1820</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn5"></i>
+        </div>
+        <!-- box6-->
+        <div class="product-box">
+          <img src="./src/image/f6.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code6</h2>
+          <span class="price">$1120</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn6"></i>
+        </div>
+        <!-- box7-->
+        <div class="product-box">
+          <img src="./src/image/f7.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code7</h2>
+          <span class="price">$14.5</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn7"></i>
+        </div>
+        <!-- box8-->
+        <div class="product-box">
+          <img src="./src/image/f8.jpg" alt="" class="product-img" />
+          <h2 class="product-title">shirt code8</h2>
+          <span class="price">$120</span>
+          <i class="bx bx-shopping-bag add-cart btn" id="btn8"></i>
+        </div>
+      </div>
+    </section>
+    <!-- cart -->
+    <div class="cart">
+      <h2 class="cart-title">Your cart</h2>
+      <!-- content -->
+      <div class="cart-content"></div>
+      <!-- total -->
+      <div class="total">
+        <div class="total-title">Total</div>
+        <div class="total-price">$0</div>
+      </div>
+      <!-- buy button -->
+      <button type="button" class="btn-buy">buy now</button>
+      <!-- cart close -->
+      <i class="bx bx-x" id="close-cart"></i>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
