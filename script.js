@@ -27,7 +27,7 @@ cartIcon.onclick = (e) => {
   for (var i = 0; i < chevronDown.length; i++) {
     chevronDown[i].addEventListener("click", getchevronDown);
   }
-//add value input to local storage
+  //add value input to local storage
   let price = document.getElementsByClassName("cart-quantity");
   for (var i = 0; i < price.length; i++) {
     let valueprice = Number(price[i].value);
@@ -36,6 +36,12 @@ cartIcon.onclick = (e) => {
 };
 //close cart
 closeCart.onclick = () => {
+  //add value input to local storage
+  let price = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < price.length; i++) {
+    let valueprice = Number(price[i].value);
+    saveLocalinputvalue(valueprice++);
+  }
   cart.classList.remove("active");
 };
 
@@ -91,11 +97,13 @@ function buybuttonclicked() {
     saveLocalcountincart(countcart);
     //remove product in cart
     removeLocalproductincart(cartcontent);
+    //remove numberQt in cart
+    removeLocalinputvalue(cartcontent);
     //remove total in cart
     removeLocaltotaltincart(removetotalcart);
     cartcontent.removeChild(cartcontent.firstChild);
   }
-  //close cart
+  //close cart buying
   cart.classList.remove("active");
   updatetotale();
 }
@@ -116,12 +124,6 @@ function removeCartItem(event) {
   //remove product in cart
   let removecartcountproduct = buttonClicked.parentElement;
   //remove numberQT in cart
-  let price = document.getElementsByClassName("cart-quantity");
-  for (var i = 0; i < price.length; i++) {
-    let valueprice = Number(price[i].value);
-    console.log(valueprice);
-  }
-
   removeLocalinputvalue(removecartcountproduct);
 
   //remove product in cart
@@ -394,8 +396,11 @@ function removeLocalinputvalue(input) {
     : [];
   console.log(inputvalue.length);
   let leng = inputvalue.length - 1;
-  // const filteredinputvalue = inputvalue.slice(inputvalue.length, 1);
-  // console.log(filteredinputvalue);
-  // localStorage.setItem("inputs", JSON.stringify(filteredinputvalue));
+  const filteredinputvalue = inputvalue.slice(
+    inputvalue.length,
+    inputvalue.length
+  );
+  console.log(filteredinputvalue);
+  localStorage.setItem("inputs", JSON.stringify(filteredinputvalue));
 }
 //end local storage of  input value in cart
