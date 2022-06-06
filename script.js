@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", getLocalcountincart);
 document.addEventListener("DOMContentLoaded", getLocalproductincart);
 //show total price in cart
 document.addEventListener("DOMContentLoaded", getLocaltotalincart);
-
 //show input value in cart
 document.addEventListener("DOMContentLoaded", getLocalinputvalue);
 // the chevron up
@@ -19,7 +18,7 @@ let chevronUp = document.getElementsByClassName("bx-chevron-up");
 // the chevron down
 let chevronDown = document.getElementsByClassName("bx-chevron-down");
 // open cart
-cartIcon.onclick = () => {
+cartIcon.onclick = (e) => {
   cart.classList.add("active");
   // the chevron up listener
   for (var i = 0; i < chevronUp.length; i++) {
@@ -27,6 +26,12 @@ cartIcon.onclick = () => {
   } // the chevron down listener
   for (var i = 0; i < chevronDown.length; i++) {
     chevronDown[i].addEventListener("click", getchevronDown);
+  }
+//add value input to local storage
+  let price = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < price.length; i++) {
+    let valueprice = Number(price[i].value);
+    saveLocalinputvalue(valueprice++);
   }
 };
 //close cart
@@ -110,6 +115,15 @@ function removeCartItem(event) {
   saveLocalcountincart(count);
   //remove product in cart
   let removecartcountproduct = buttonClicked.parentElement;
+  //remove numberQT in cart
+  let price = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < price.length; i++) {
+    let valueprice = Number(price[i].value);
+    console.log(valueprice);
+  }
+
+  removeLocalinputvalue(removecartcountproduct);
+
   //remove product in cart
   removeLocalproductincart(removecartcountproduct);
   //remove input value in cart
@@ -117,6 +131,7 @@ function removeCartItem(event) {
   removecartcountproduct.remove();
   if (lastremoveIcon == 1) {
     //close the cart
+
     cart.classList.remove("active");
   }
   updatetotale();
@@ -136,6 +151,7 @@ function quantityChange(event) {
 function getchevronUp(e) {
   let input = e.target.parentElement.childNodes[5];
   let price = document.getElementsByClassName("cart-quantity");
+
   let tot = 0;
   for (var i = 0; i < price.length; i++) {
     if (parseFloat(price[i].value)) tot += parseFloat(price[i].value);
@@ -149,17 +165,22 @@ function getchevronUp(e) {
   if (input.value >= 1) {
     let count = (countInCart.innerText = tot + 1);
     saveLocalcountincart(count);
+    for (var i = 0; i < price.length; i++) {
+      let valueprice = Number(price[i].value);
+      saveLocalinputvalue(valueprice++);
+    }
   }
   updatetotale();
 }
 //dicrement the input value
 function getchevronDown(e) {
   let input = e.target.parentElement.childNodes[5];
-
   let price = document.getElementsByClassName("cart-quantity");
   let tot = 0;
   for (var i = 0; i < price.length; i++) {
     if (parseFloat(price[i].value)) tot += parseFloat(price[i].value);
+    let valueprice = Number(price[i].value);
+    saveLocalinputvalue(valueprice--);
   }
   input.value--;
   if (isNaN(input.value) || input.value <= 0) {
@@ -169,7 +190,11 @@ function getchevronDown(e) {
 
   if (input.value >= 1) {
     let count = (countInCart.innerText = tot - 1);
-    saveLocalcountincart(count - 1);
+    saveLocalcountincart(count);
+    for (var i = 0; i < price.length; i++) {
+      let valueprice = Number(price[i].value);
+      saveLocalinputvalue(valueprice--);
+    }
   }
   updatetotale();
 }
@@ -181,9 +206,11 @@ function addCartClicked(event) {
   saveLocalcountincart(countcart + 1);
   let button = event.target;
   let shopProducts = button.parentElement;
+
   let title = shopProducts.getElementsByClassName("product-title")[0].innerText;
   console.log(title);
   let price = shopProducts.getElementsByClassName("price")[0].innerText;
+
   let productImg = shopProducts.getElementsByClassName("product-img")[0].src;
   addProductToCart(title, price, productImg);
   updatetotale();
@@ -208,7 +235,7 @@ function addProductToCart(title, price, productImg) {
 <div class="detail-box">
   <div class="cart-product-title">${title}</div>
   <div class="cart-price">${price}</div>
-  <input type="number" value="1" class="cart-quantity" /><i class='bx bx-chevron-up' id"bx-chevron-up"></i><i class='bx bx-chevron-down' id"bx-chevron-down"></i>
+  <input class="cart-quantity " type="number" value="1"/><i class='bx bx-chevron-up' id"bx-chevron-up"></i><i class='bx bx-chevron-down' id"bx-chevron-down"></i>
 </div>
 <!-- remove cart -->
 <i class="bx bxs-trash-alt cart-remove"></i>`;
@@ -340,28 +367,35 @@ function saveLocalinputvalue(input) {
   localStorage.setItem("inputs", JSON.stringify(inputvalue));
 }
 
-function getLocalinputvalue() {
+function getLocalinputvalue(e) {
   let inputvalue = localStorage.getItem("inputs")
     ? JSON.parse(localStorage.getItem("inputs"))
     : [];
+  let numberQt = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < numberQt.length; i++) {
+    numberQt[i].value = 1;
+    let me = inputvalue.slice(-numberQt.length);
 
-  inputvalue.forEach((input) => {
-    let quantityinputs = document.getElementsByClassName("cart-quantity");
-    for (let i = 0; i < quantityinputs.length; i++) {
-      var x = quantityinputs[i];
-      x.value = input;
-      console.log(x.value);
-      // input.addEventListener("change", quantityChange);
-    }
-  });
+    numberQt[i].value = 1;
+    numberQt[0].value = me[0];
+    numberQt[1].value = me[1];
+    numberQt[2].value = me[2];
+    numberQt[3].value = me[3];
+    numberQt[4].value = me[4];
+    numberQt[5].value = me[5];
+    numberQt[6].value = me[6];
+    numberQt[7].value = me[7];
+  }
 }
 
 function removeLocalinputvalue(input) {
   let inputvalue = localStorage.getItem("inputs")
     ? JSON.parse(localStorage.getItem("inputs"))
     : [];
-
-  const filteredinputvalue = inputvalue.slice(0, -1);
-  localStorage.setItem("inputs", JSON.stringify(filteredinputvalue));
+  console.log(inputvalue.length);
+  let leng = inputvalue.length - 1;
+  // const filteredinputvalue = inputvalue.slice(inputvalue.length, 1);
+  // console.log(filteredinputvalue);
+  // localStorage.setItem("inputs", JSON.stringify(filteredinputvalue));
 }
 //end local storage of  input value in cart
