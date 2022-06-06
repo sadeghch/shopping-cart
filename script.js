@@ -27,13 +27,8 @@ cartIcon.onclick = (e) => {
   for (var i = 0; i < chevronDown.length; i++) {
     chevronDown[i].addEventListener("click", getchevronDown);
   }
-  //add value input to local storage
-  let price = document.getElementsByClassName("cart-quantity");
-  for (var i = 0; i < price.length; i++) {
-    let valueprice = Number(price[i].value);
-    saveLocalinputvalue(valueprice++);
-  }
 };
+
 //close cart
 closeCart.onclick = () => {
   //add value input to local storage
@@ -125,7 +120,12 @@ function removeCartItem(event) {
   let removecartcountproduct = buttonClicked.parentElement;
   //remove numberQT in cart
   removeLocalinputvalue(removecartcountproduct);
-
+  //add value input to local storage
+  let price = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < price.length; i++) {
+    let valueprice = Number(price[i].value);
+    saveLocalinputvalue(valueprice++);
+  }
   //remove product in cart
   removeLocalproductincart(removecartcountproduct);
   //remove input value in cart
@@ -215,6 +215,12 @@ function addCartClicked(event) {
 
   let productImg = shopProducts.getElementsByClassName("product-img")[0].src;
   addProductToCart(title, price, productImg);
+  //add value input to local storage
+  let priceValue = document.getElementsByClassName("cart-quantity");
+  for (var i = 0; i < priceValue.length; i++) {
+    let valueprice = Number(priceValue[i].value);
+    saveLocalinputvalue(valueprice);
+  }
   updatetotale();
 }
 
